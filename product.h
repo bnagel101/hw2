@@ -5,6 +5,8 @@
 #include <set>
 #include <vector>
 #include <algorithm>
+#include "util.h"
+#include <ostream>
 
 class Product {
 public:

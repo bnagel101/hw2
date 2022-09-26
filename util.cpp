@@ -3,8 +3,10 @@
 #include <cctype>
 #include <algorithm>
 #include "util.h"
+#include <ctype.h>
 
 using namespace std;
+
 std::string convToLower(std::string src)
 {
     std::transform(src.begin(), src.end(), src.begin(), ::tolower);
@@ -15,16 +17,30 @@ std::string convToLower(std::string src)
     to a set of words based on the criteria given in the assignment **/
 std::set<std::string> parseStringToWords(string rawWords)
 {
+    set<string> keywords;
+    int start = 0;
 
-
-
-
-
-
-
-
-
-
+    for(unsigned int i = 0; i < rawWords.size(); i++){
+        if((isalpha(rawWords[i]) || isdigit(rawWords[i]))){
+            start = i;
+            int end = i;
+            for(unsigned int j = i; j < rawWords.size(); j++){
+                if((!isalpha(rawWords[j]) && !isdigit(rawWords[j]))){
+                    end = j;
+                    break;
+                }else if(j == rawWords.size()-1){
+                    end = j+1;
+                    break;
+                }
+            }
+            if(end - start >= 2){
+                keywords.insert(rawWords.substr(start, end - start));
+            }
+            i = end;
+            
+        }
+    }
+    return keywords;
 }
 
 /**************************************************
