@@ -9,40 +9,27 @@ Movie::Movie(const string category, const string name, double price, int qty, st
 	mRating = rating;
 }
 
-set<string> lowerConv(set<string> a){
-	set<string> newS;
-	set<string>::iterator it = a.begin();
-	while(it != a.end()){
-		string data = *it;
-		transform(data.begin(), data.end(), data.begin(), [](unsigned char c){ return std::tolower(c); });
-		newS.insert(data);
-	}
-	return newS;
-}
 
 set<string> Movie::keywords() const{
 	set<string> mKeys;
 	mKeys.insert(category_);
-	auto words = parseStringToWords(getName());
-	setUnion(mKeys, words);
-	words = parseStringToWords(mGenre);
-	setUnion(mKeys, words);
-	mKeys = lowerConv(mKeys);
+	set<string> temp = parseStringToWords(getName());
+	mKeys = setUnion(mKeys, temp);
+	temp = parseStringToWords(mGenre);
+	mKeys = setUnion(mKeys, temp);
 	return mKeys;
 }
 
 
 string Movie::displayString() const{
 	ostringstream oss;
-	oss << category_ << endl;
 	oss << getName() << endl;
-	oss << getPrice() << endl;
-	oss << getQty() << endl;
-	oss << mGenre << endl;
-	oss << mRating << endl;
+	oss << "Genre: " << mGenre << " Rating: " << mRating << endl;
+	oss << getPrice() << " " << getQty() << " left." << endl;
 	return oss.str();
 }
 
 void Movie::dump(ostream& os){
-	cout << displayString();
+	Product::dump(os);
+	os << mGenre << endl << mRating << endl;
 }

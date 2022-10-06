@@ -33,6 +33,7 @@ public:
      */
     virtual void dump(std::ostream& os) const;
 
+		
     /**
      * Accessors and mutators
      */

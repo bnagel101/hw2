@@ -6,6 +6,7 @@ class Movie : public Product {
 		std::set<std::string> keywords() const;
 		std::string displayString() const;
 		void dump(std::ostream& os);
+		~Movie()=default;
 	protected:
 		std::string mGenre;
 		std::string mRating;

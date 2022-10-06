@@ -34,7 +34,7 @@ std::set<std::string> parseStringToWords(string rawWords)
                 }
             }
             if(end - start >= 2){
-                keywords.insert(rawWords.substr(start, end - start));
+                keywords.insert(convToLower(rawWords.substr(start, end - start)));
             }
             i = end;
             

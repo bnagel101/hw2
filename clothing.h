@@ -6,6 +6,7 @@ class Clothing : public Product {
 		std::set<std::string> keywords() const;
 		std::string displayString() const;
 		void dump(std::ostream& os);
+		~Clothing()=default;
 	protected:
 		std::string cSize;
 		std::string cBrand;

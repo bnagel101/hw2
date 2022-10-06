@@ -9,43 +9,29 @@ Clothing::Clothing(const string category, const string name, double price, int q
 	cBrand = brand;
 }
 
-set<string> lowerConv(set<string> a){
-	set<string> newS;
-	set<string>::iterator it = a.begin();
-	while(it != a.end()){
-		string data = *it;
-		transform(data.begin(), data.end(), data.begin(), [](unsigned char c){ return std::tolower(c); });
-		newS.insert(data);
-	}
-	return newS;
-}
 
 set<string> Clothing::keywords() const{
 	set<string> cKeys;
 	cKeys.insert(category_);
-	auto words = parseStringToWords(getName());
-	setUnion(cKeys, words);
-	words = parseStringToWords(cSize);
-	setUnion(cKeys, words);
-	words = parseStringToWords(cBrand);
-	setUnion(cKeys, words);
-	cKeys = lowerConv(cKeys);
+	set<string> temp = parseStringToWords(getName());
+	cKeys = setUnion(cKeys, temp);
+	temp = parseStringToWords(cSize);
+	cKeys = setUnion(cKeys, temp);
+	temp = parseStringToWords(cBrand);
+	cKeys = setUnion(cKeys, temp);
 	return cKeys;
 }
 
 
 string Clothing::displayString() const{
 	ostringstream oss;
-	//string display = category + "/n" + name + "/n" + price + "/n" + quantity + "/n" + bIsbn + "/n" + bAuthor + "/n";
-	oss << category_ << endl;
 	oss << getName() << endl;
-	oss << getPrice() << endl;
-	oss << getQty() << endl;
-	oss << cSize << endl;
-	oss << cBrand << endl;
+	oss << "Size: " << cSize << " Brand: " << cBrand << endl;
+	oss << getPrice() << " " << getQty() << " left." << endl;
 	return oss.str();
 }
-
+	
 void Clothing::dump(ostream& os){
-	cout << displayString();
+	Product::dump(os);
+	os << cSize << endl << cBrand << endl;
 }

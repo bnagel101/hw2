@@ -9,43 +9,34 @@ Book::Book(const string category, const string name, double price, int qty, stri
 	bAuthor = author;
 }
 
-set<string> lowerConv(set<string> a){
-	set<string> newS;
-	set<string>::iterator it = a.begin();
-	while(it != a.end()){
-		string data = *it;
-		transform(data.begin(), data.end(), data.begin(), [](unsigned char c){ return std::tolower(c); });
-		newS.insert(data);
-	}
-	return newS;
-}
-
-set<string> Book::keywords() {
+//creates set of strings to fill with keywords, creates another set of strings
+// for name and product specific strings in order to call the parseStringToWords
+// function on it, then uses the set union function to join the two sets
+set<string> Book::keywords() const{
 	set<string> bKeys;
 	bKeys.insert(category_);
-	auto words = parseStringToWords(getName());
-	setUnion(bKeys, words);
-	words = parseStringToWords(bAuthor);
-	setUnion(bKeys, words);
+	set<string> temp = parseStringToWords(getName());
+	bKeys = setUnion(temp, bKeys);
+	temp = parseStringToWords(bAuthor);
+	bKeys = setUnion(bKeys, temp);
 	bKeys.insert(bIsbn);
-	bKeys = lowerConv(bKeys);
 	return bKeys;
 }
 
-string Book::displayString() {
+//adds all product terms and product specific terms in order specified and returns the ostringstream
+string Book::displayString() const{
 	ostringstream oss;
 	//string display = category + "/n" + name + "/n" + price + "/n" + quantity + "/n" + bIsbn + "/n" + bAuthor + "/n";
-	oss << category_ << endl;
 	oss << getName() << endl;
-	oss << getPrice() << endl;
-	oss << getQty() << endl;
-	oss << bIsbn << endl;
-	oss << bAuthor << endl;
+	oss << "Author: " << bAuthor << " ISBN: " << bIsbn << endl;
+	oss << getPrice() << " " << getQty() << " left." << endl;
 	return oss.str();
 }
 
+//edits the ostream by using the product dump function and then adds product specific terms
 void Book::dump(ostream& os){
-	cout << displayString();
+	Product::dump(os);
+	os << bIsbn << endl << bAuthor << endl;
 }
 
 
