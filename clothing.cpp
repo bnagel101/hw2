@@ -25,13 +25,13 @@ set<string> Clothing::keywords() const{
 
 string Clothing::displayString() const{
 	ostringstream oss;
-	oss << getName() << endl;
-	oss << "Size: " << cSize << " Brand: " << cBrand << endl;
-	oss << getPrice() << " " << getQty() << " left." << endl;
+	oss << getName() << "\n";
+	oss << "Size: " << cSize << " Brand: " << cBrand << "\n";
+	oss << getPrice() << " " << getQty() << " left." << "\n";
 	return oss.str();
 }
 	
-void Clothing::dump(ostream& os){
+void Clothing::dump(ostream& os) const{
 	Product::dump(os);
-	os << cSize << endl << cBrand << endl;
+	os << cSize << "\n" << cBrand << "\n";
 }

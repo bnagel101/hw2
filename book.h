@@ -9,7 +9,7 @@ class Book : public Product {
 		//returns string of info on book
 		std::string displayString() const;
 		//adds database formate to ostream
-		void dump(std::ostream& os);
+		void dump(std::ostream& os) const;
 		~Book()=default;
 	protected:
 		std::string bIsbn;

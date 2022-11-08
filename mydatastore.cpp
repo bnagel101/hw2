@@ -121,17 +121,17 @@ void MyDataStore::viewCart(string uN){
 
 //adds the new database format to the ostream file, first adds products and then users
 void MyDataStore::dump(std::ostream& ofile){
-	ofile << "<product>" << endl;
+	ofile << "<products>" << "\n";
 	//std::map<std::string, Product*> nameProduct;
 	for(pair<string, Product*> i: nameProduct){
 		(i.second)->dump(ofile);
 	}
-	ofile << "<product>" << endl;
-	ofile << "<users>" << endl;
+	ofile << "</products>" << "\n";
+	ofile << "<users>" << "\n";
 	for(pair<string, User*> i: username){
 		(i.second)->dump(ofile);
 	}
-	ofile << "<users>" << endl;
+	ofile << "</users>" << "\n";
 }
 
 //destructor

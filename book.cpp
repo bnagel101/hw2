@@ -27,16 +27,16 @@ set<string> Book::keywords() const{
 string Book::displayString() const{
 	ostringstream oss;
 	//string display = category + "/n" + name + "/n" + price + "/n" + quantity + "/n" + bIsbn + "/n" + bAuthor + "/n";
-	oss << getName() << endl;
-	oss << "Author: " << bAuthor << " ISBN: " << bIsbn << endl;
-	oss << getPrice() << " " << getQty() << " left." << endl;
+	oss << getName() << "\n";
+	oss << "Author: " << bAuthor << " ISBN: " << bIsbn << "\n";
+	oss << getPrice() << " " << getQty() << " left." << "\n";
 	return oss.str();
 }
 
 //edits the ostream by using the product dump function and then adds product specific terms
-void Book::dump(ostream& os){
+void Book::dump(ostream& os) const{
 	Product::dump(os);
-	os << bIsbn << endl << bAuthor << endl;
+	os << bIsbn << "\n" << bAuthor << "\n";
 }
 
 

@@ -10,6 +10,7 @@
 #include "product_parser.h"
 #include "util.h"
 #include "mydatastore.h"
+#include "book.h"
 
 using namespace std;
 struct ProdNameSorter {
@@ -31,9 +32,10 @@ int main(int argc, char* argv[])
      *  DataStore type to your derived type
      ****************/
     MyDataStore ds;
-
-
-
+		// Book a("book", "HP", 4.0, 7, "900000-4555", "Blake");
+		// std::ostringstream tS;
+		// a.dump(tS);
+		// cout << tS.str();
     // Instantiate the individual section and product parsers we want
     ProductSectionParser* productSectionParser = new ProductSectionParser;
     productSectionParser->addProductParser(new ProductBookParser);
@@ -95,6 +97,9 @@ int main(int argc, char* argv[])
                 string filename;
                 if(ss >> filename) {
                     ofstream ofile(filename.c_str());
+										//std::ostringstream tS;
+										//ds.dump(tS);
+										//cout << tS.str();
                     ds.dump(ofile);
                     ofile.close();
                 }
@@ -124,9 +129,6 @@ int main(int argc, char* argv[])
 							ds.addToCart(uN, hits[hNum-1]);
 						}
 	    /* Add support for other commands here */
-
-
-
 
             else {
                 cout << "Unknown command" << endl;

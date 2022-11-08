@@ -23,13 +23,13 @@ set<string> Movie::keywords() const{
 
 string Movie::displayString() const{
 	ostringstream oss;
-	oss << getName() << endl;
-	oss << "Genre: " << mGenre << " Rating: " << mRating << endl;
-	oss << getPrice() << " " << getQty() << " left." << endl;
+	oss << getName() << "\n";
+	oss << "Genre: " << mGenre << " Rating: " << mRating << "\n";
+	oss << getPrice() << " " << getQty() << " left." << "\n";
 	return oss.str();
 }
 
-void Movie::dump(ostream& os){
+void Movie::dump(ostream& os) const{
 	Product::dump(os);
-	os << mGenre << endl << mRating << endl;
+	os << mGenre << "\n" << mRating << "\n";
 }
